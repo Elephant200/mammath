@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+/* ---- Ice-age dark (default) ---- */
+:root,
+[data-theme="dark"] {
+  --bg: #0f161c;
+  --bg-alt: #18222b;
+  --text: #e7eef3;
+  --sub: #5d7180;
+  --sub-alt: #243039;
+  --accent: #6fd3e8;
+  --error: #e0686f;
+  --gold: #f0c46b;
+  --caret: var(--accent);
+}
+
+/* ---- Ice-age light (snow) ---- */
+[data-theme="light"] {
+  --bg: #eaf2f6;
+  --bg-alt: #dce8ee;
+  --text: #17242c;
+  --sub: #7d94a1;
+  --sub-alt: #cddbe4;
+  --accent: #1f97bd;
+  --error: #c94a52;
+  --gold: #c98a1e;
+  --caret: var(--accent);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-alt: var(--bg-alt);
+  --color-text: var(--text);
+  --color-sub: var(--sub);
+  --color-sub-alt: var(--sub-alt);
+  --color-accent: var(--accent);
+  --color-error: var(--error);
+  --color-gold: var(--gold);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+@keyframes caret-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.caret {
+  display: inline-block;
+  width: 0.06em;
+  background: var(--caret);
+  border-radius: 2px;
+  animation: caret-blink 1s steps(1) infinite;
+  transition: background 0.15s ease;
+}
+.caret.typing { animation: none; opacity: 1; }
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(80vh) rotate(540deg); opacity: 0; }
+}
+.confetti-piece {
+  position: absolute;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  animation: confetti-fall 1.6s ease-in forwards;
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.96); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.pop-in { animation: pop-in 0.18s ease-out; }
+
+/* hide native number input spinners */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; }
